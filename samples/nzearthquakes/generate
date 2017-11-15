@@ -3,6 +3,7 @@
 curl -o database.csv 'https://wfs.geonet.org.nz/geonet/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=geonet:quake_search_v1&maxFeatures=50&outputFormat=csv'
 
 (cat - | sqlite3 database.db) << EOF
+create table quakes(publicid,eventtype,origintime,modificationtime,longitude,latitude,magnitude,depth,magnitudetype,depthtype,evaluationmethod,evaluationstatus,evaluationmode,earthmodel,usedphasecount,usedstationcount,magnitudestationcount,minimumdistance,azimuthalgap,originerror,magnitudeuncertainty);
 .mode csv
 .import database.csv quakes
 EOF
