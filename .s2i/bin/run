@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Run usage script.
+
+exec /opt/app-root/s2i/usage

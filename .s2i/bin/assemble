@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -x
+
+set -eo pipefail
+
+# This S2I assemble script is only used when creating the custom image.
+# For when running the image, or using it as a S2I builder, we use a second
+# set of custom S2I scripts. We now need to move these into the correct
+# location and have the custom image use those by dropping in an image
+# metadata file which overrides the labels of the base image.
+
+mkdir -p /opt/app-root/s2i
+
+mv /tmp/src/assemble /opt/app-root/s2i/assemble
+mv /tmp/src/run /opt/app-root/s2i/run
+mv /tmp/src/save-artifacts /opt/app-root/s2i/save-artifacts
+mv /tmp/src/usage /opt/app-root/s2i/usage
+
+mkdir -p /tmp/.s2i
+
+mv /tmp/src/image_metadata.json /tmp/.s2i/image_metadata.json
+
+rm -rf /tmp/src
+
+# Ensure have latest versions of packaging tools.
+
+pip install --upgrade pip setuptools wheel
+
+# Install the datasette package.
+
+pip install datasette
+
+# Fixup permissions on directories and files.
+
+fix-permissions /opt/app-root

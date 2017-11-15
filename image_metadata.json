@@ -1,0 +1,9 @@
+{
+  "labels": [
+    {"io.k8s.display-name":"Datasette"},
+    {"io.k8s.description":"S2I builder for Datasette."},
+    {"io.openshift.s2i.scripts-url":"image:///opt/app-root/s2i"},
+    {"io.s2i.scripts-url":"image:///opt/app-root/s2i"},
+    {"io.openshift.tags":"builder,datasette"}
+  ]
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cat << EOF
+This is an S2I builder for using Datasette to provide an instant, read-only
+JSON API for any SQLite database.
+EOF

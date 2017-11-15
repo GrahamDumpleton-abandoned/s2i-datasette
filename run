@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -x
+
+set -eo pipefail
+
+OPTIONS=""
+
+DATASETTE_DATABASE=${DATASETTE_DATABASE:-database.db}
+DATASETTE_METADATA=${DATASETTE_METADATA:-metadata.json}
+
+if [ -f $DATASETTE_METADATA ]; then
+    OPTIONS="$OPTIONS --metadata $DATASETTE_METADATA"
+fi
+
+exec datasette serve --host 0.0.0.0 --port 8080 \
+  $OPTIONS $DATASETTE_EXTRA_OPTIONS $DATASETTE_DATABASE

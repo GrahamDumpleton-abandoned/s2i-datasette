@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -x
+
+set -eo pipefail
+
+DATASETTE_REQUIREMENTS=${DATASETTE_REQUIREMENTS:-requirements.txt}
+DATASETTE_GENERATE=${DATASETTE_GENERATE:-generate}
+
+# Copy injected files to correct place.
+
+cp -Rf /tmp/src/. /opt/app-root/src
+
+rm -rf /tmp/src
+
+# Install any additional Python packages needed.
+
+if [ -f $DATASETTE_REQUIREMENTS ]; then
+    pip install -r $DATASETTE_REQUIREMENTS
+fi
+
+# Run any script to generate database file.
+
+if [ -x $DATASETTE_GENERATE ]; then
+    $DATASETTE_GENERATE
+fi
