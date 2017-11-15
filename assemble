@@ -15,12 +15,12 @@ rm -rf /tmp/src
 
 # Install any additional Python packages needed.
 
-if [ -f $DATASETTE_REQUIREMENTS ]; then
-    pip install -r $DATASETTE_REQUIREMENTS
+if [ -f ./$DATASETTE_REQUIREMENTS ]; then
+    pip install -r ./$DATASETTE_REQUIREMENTS
 fi
 
 # Run any script to generate database file.
 
-if [ -x $DATASETTE_GENERATE ]; then
-    $DATASETTE_GENERATE
+if [ -x ./$DATASETTE_GENERATE ]; then
+    ./$DATASETTE_GENERATE
 fi
